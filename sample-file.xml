@@ -1,0 +1,8 @@
+<core>
+    <frontpage>
+        <section id="menu" visibility="1" />
+        <section id="banner" visibility="0" />
+        <section id="partners" visibility="0" />
+        <section id="participants" visibility="1" />
+    </frontpage>
+</core>
