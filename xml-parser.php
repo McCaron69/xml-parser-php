@@ -8,9 +8,27 @@ function ParseXML($pathToXML) {
 
     $XMLContentsArray = preg_grep('/^($|\n {0,}|\r {0,}|\r\n {0,})/', $XMLContentsArray, PREG_GREP_INVERT);
 
-    // $XMLContentsArray = array_diff($XMLContentsArray, ["", " ", "\r", "\n", "\r\n", "\r\n    ", "\r\n        "]);
+    $parsedXMLData = [];
+    $arrayCurrentIndex = 0;
+
+    foreach($XMLContentsArray as $element) {
+        if(preg_match('/^section id="\w{1,}" visibility="[0|1]"/', $element)) {
+            $match;
+
+            preg_match('/id="\w{1,}"/', $element, $match);
+            $parsedXMLData[$arrayCurrentIndex]['id'] = $match[1];
+            preg_match('/visibility="[0|1]"/', $element, );
+            $parsedXMLData[$arrayCurrentIndex]['visibility'] = $match[1];
+
+            $arrayCurrentIndex++;
+        }
+    }
 
     var_dump($XMLContentsArray);
+
+    echo "\n<br>";
+
+    var_dump($parsedXMLData);
 
     return $XMLContentsArray;
 }
