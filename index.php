@@ -4,5 +4,10 @@ require_once "xml-parser.php";
 
 $pathToFile = "./sample-file.xml";  
 
-// echo '<pre>' . ParseXML($pathToFile) . '</pre>';
-ParseXML($pathToFile);
+$parsedXMLData = ParseXML($pathToFile);
+
+foreach($parsedXMLData as $element) {
+    if($element['visibility'] == "1") {
+        echo "<div>" . $element['id'] . "</div>";
+    }
+}

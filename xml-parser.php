@@ -1,8 +1,6 @@
 <?php
 function ParseXML($pathToXML) {
-    $XMLFileContents = file_get_contents($pathToXML) or die("Error on reading XML file.");
-
-    // $XMLFileContents = preg_replace('/[\n\r]/', '', $XMLFileContents);
+    $XMLFileContents = file_get_contents($pathToXML) or die("XML file not found.");
 
     $XMLContentsArray = preg_split('/(<|>)/', $XMLFileContents);
 
@@ -15,20 +13,15 @@ function ParseXML($pathToXML) {
         if(preg_match('/^section id="\w{1,}" visibility="[0|1]"/', $element)) {
             $match;
 
-            preg_match('/id="\w{1,}"/', $element, $match);
-            $parsedXMLData[$arrayCurrentIndex]['id'] = $match[1];
-            preg_match('/visibility="[0|1]"/', $element, );
-            $parsedXMLData[$arrayCurrentIndex]['visibility'] = $match[1];
+            preg_match('/id="(\w{1,})"/', $element, $match, PREG_OFFSET_CAPTURE);
+            $parsedXMLData[$arrayCurrentIndex]['id'] = $match[1][0];
+
+            preg_match('/visibility="([0|1])"/', $element, $match, PREG_OFFSET_CAPTURE);
+            $parsedXMLData[$arrayCurrentIndex]['visibility'] = $match[1][0];
 
             $arrayCurrentIndex++;
         }
     }
 
-    var_dump($XMLContentsArray);
-
-    echo "\n<br>";
-
-    var_dump($parsedXMLData);
-
-    return $XMLContentsArray;
+    return $parsedXMLData;
 }
