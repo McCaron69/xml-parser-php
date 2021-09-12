@@ -8,6 +8,6 @@ $parsedXMLData = ParseXML($pathToFile);
 
 foreach($parsedXMLData as $element) {
     if($element['visibility'] == "1") {
-        echo "<div>" . $element['id'] . "</div>";
+        echo "<div id=\"{$element['id']}\">{$element['id']}</div>";
     }
 }
